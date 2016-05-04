@@ -1,0 +1,58 @@
+﻿@model Team14_Final_Project.Models.Position
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Position</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionTypes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionTypes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicableMajor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicableMajor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionDeadline)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PositionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

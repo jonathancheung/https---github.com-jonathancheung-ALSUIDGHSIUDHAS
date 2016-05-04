@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Team14_Final_Project.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Company Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+ 
+        <th>
+            @Html.ActionLink("Company Description", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>
+        <th></th>
+    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Industries)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Industries)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CompanyID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CompanyID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CompanyID })
+                </td>
+            </tr>
+        }
+
+    </table>

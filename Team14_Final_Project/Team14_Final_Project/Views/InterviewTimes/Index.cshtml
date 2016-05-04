@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Team14_Final_Project.Models.InterviewTimes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InterviewTimesID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InterviewTimesID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InterviewTimesID })
+        </td>
+    </tr>
+}
+
+</table>
