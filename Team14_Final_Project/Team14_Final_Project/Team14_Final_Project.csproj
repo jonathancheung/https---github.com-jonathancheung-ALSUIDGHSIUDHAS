@@ -188,7 +188,6 @@
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,7 +211,6 @@
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
