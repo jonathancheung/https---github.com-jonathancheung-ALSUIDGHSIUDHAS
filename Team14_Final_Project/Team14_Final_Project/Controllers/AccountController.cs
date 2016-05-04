@@ -115,6 +115,9 @@ namespace Team14_Final_Project.Controllers
             {
                 //TODO: Add fields to user here so they will be saved to do the database
                 var user = new AppUser { UserName = model.Email, Email = model.Email, Students = model.student};
+                user.UserName = model.Email;
+                user.Email = model.Email;
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 //TODO:  Once you get roles working, you may want to add users to roles upon creation

@@ -49,16 +49,16 @@ namespace Team14_Final_Project.Controllers
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s=> s.FirstName.Contains(searchString) ||
-                    s.Email.Contains(searchString));
+                students = students.Where(s=> s.AppUsers.FirstName.Contains(searchString) ||
+                    s.AppUsers.Email.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    students = students.OrderByDescending(s => s.FirstName);
+                    students = students.OrderByDescending(s => s.AppUsers.FirstName);
                     break;
                 case "Date":
-                    students = students.OrderBy(s => s.Email);
+                    students = students.OrderBy(s => s.AppUsers.Email);
                     break;
                 case "date_desc":
                     students = students.OrderByDescending(s => s.Major);
@@ -77,7 +77,7 @@ namespace Team14_Final_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(student);
+                db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -137,7 +137,7 @@ namespace Team14_Final_Project.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Student student = db.Students.Find(id);
-            db.Users.Remove(student);
+            db.Students.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Team14_Final_Project.Models
 {
-    public class Recruiter : AppUser
+    public class Recruiter
     {
         [Key]
         public Int32 RecruiterID { get; set; }

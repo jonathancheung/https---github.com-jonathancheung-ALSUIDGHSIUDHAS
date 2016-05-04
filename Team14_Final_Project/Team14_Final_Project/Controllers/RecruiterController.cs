@@ -17,7 +17,7 @@ namespace Team14_Final_Project.Controllers
         // GET: /Recruiter/
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Recruiters.ToList());
         }
 
         // GET: /Recruiter/Details/5
@@ -50,7 +50,7 @@ namespace Team14_Final_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(recruiter);
+                db.Recruiters.Add(recruiter);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -110,7 +110,7 @@ namespace Team14_Final_Project.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Recruiter recruiter = db.Recruiters.Find(id);
-            db.Users.Remove(recruiter);
+            db.Recruiters.Remove(recruiter);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

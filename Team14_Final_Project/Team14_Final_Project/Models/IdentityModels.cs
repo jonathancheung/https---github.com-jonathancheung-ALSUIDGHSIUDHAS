@@ -21,7 +21,6 @@ namespace Team14_Final_Project.Models
 
         public String FirstName { get; set; }
         public String LastName { get; set; }
-        public String Email { get; set; }
 
 
         //This method allows you to create a new user
@@ -42,7 +41,6 @@ namespace Team14_Final_Project.Models
         //Remember, Identity adds a db set for users, so you shouldn't add that one - you will get an error
         public DbSet<Company> Companies { get; set; }
         public DbSet<Industry> Industries { get; set; }
-        public DbSet<Interview> Interviews { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Recruiter> Recruiters {get; set;}
@@ -66,14 +64,6 @@ namespace Team14_Final_Project.Models
         {
             return new AppDbContext();
         }
-
-        public System.Data.Entity.DbSet<Team14_Final_Project.Models.InterviewTimes> InterviewTimes { get; set; }
-
-        public System.Data.Entity.DbSet<Team14_Final_Project.Models.Room> Rooms { get; set; }
-
-        //public System.Data.Entity.DbSet<Team14_Final_Project.Models.Industry> Industries { get; set; }
-
-        //public System.Data.Entity.DbSet<Team14_Final_Project.Models.Recruiter> Recruiters { get; set; }
 
       
     }

@@ -13,7 +13,7 @@ namespace Team14_Final_Project.Models
     public enum PositionType { Internship, FullTime}
 
 
-    public class Student : AppUser
+    public class Student
     {
         List <int> years = Enumerable.Range(DateTime.Now.Year, 10).ToList();
 

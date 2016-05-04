@@ -47,23 +47,13 @@ namespace Team14_Final_Project.Models
         
         [Required]
         [Display(Name = "First Name")]
-        public string FName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        public string LName { get; set; }
+        public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
 
-        [Required]
-        [Display(Name = "Is it okay to text you?")]
-        public bool OKToText { get; set; }
-
-        [Required]
-        [Display(Name = "Major")]
-        public string Major { get; set; }
 
 
     }
