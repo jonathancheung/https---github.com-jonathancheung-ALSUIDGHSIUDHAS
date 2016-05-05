@@ -10,118 +10,107 @@ using Team14_Final_Project.Models;
 
 namespace Team14_Final_Project.Controllers
 {
-    public class RecruiterController : Controller
+    public class MajorController : Controller
     {
         private AppDbContext db = new AppDbContext();
 
-        // GET: /Recruiter/
+        // GET: /Major/
         public ActionResult Index()
         {
-            return View(db.Recruiters.ToList());
+            return View(db.Majors.ToList());
         }
 
-        // GET: /Recruiter/Details/5
-        public ActionResult Details(string id)
+        // GET: /Major/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recruiter recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
+            Major major = db.Majors.Find(id);
+            if (major == null)
             {
                 return HttpNotFound();
             }
-            return View(recruiter);
+            return View(major);
         }
 
-        // GET: /Recruiter/Create
+        // GET: /Major/Create
         public ActionResult Create()
         {
-            var query = from c in db.Companies
-                        orderby c.CompanyName
-                        select c;
-
-            List<Company> allCompanies = query.ToList();
-            SelectList allCompaniesList = new SelectList(allCompanies, "CompanyID", "CompanyName");
-            ViewBag.AllCompanies = allCompaniesList;
-
             return View();
         }
 
-        // POST: /Recruiter/Create
+        // POST: /Major/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,RecruiterID")] Recruiter recruiter, Int32 CompanyID)
+        public ActionResult Create([Bind(Include="MajorID,MajorName")] Major major)
         {
-            Company SelectedCompany = db.Companies.Find(CompanyID);
-            recruiter.Company = SelectedCompany;
-
             if (ModelState.IsValid)
             {
-                db.Recruiters.Add(recruiter);
+                db.Majors.Add(major);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(recruiter);
+            return View(major);
         }
 
-        // GET: /Recruiter/Edit/5
-        public ActionResult Edit(string id)
+        // GET: /Major/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recruiter recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
+            Major major = db.Majors.Find(id);
+            if (major == null)
             {
                 return HttpNotFound();
             }
-            return View(recruiter);
+            return View(major);
         }
 
-        // POST: /Recruiter/Edit/5
+        // POST: /Major/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,RecruiterID")] Recruiter recruiter)
+        public ActionResult Edit([Bind(Include="MajorID,MajorName")] Major major)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recruiter).State = EntityState.Modified;
+                db.Entry(major).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(recruiter);
+            return View(major);
         }
 
-        // GET: /Recruiter/Delete/5
-        public ActionResult Delete(string id)
+        // GET: /Major/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recruiter recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
+            Major major = db.Majors.Find(id);
+            if (major == null)
             {
                 return HttpNotFound();
             }
-            return View(recruiter);
+            return View(major);
         }
 
-        // POST: /Recruiter/Delete/5
+        // POST: /Major/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Recruiter recruiter = db.Recruiters.Find(id);
-            db.Recruiters.Remove(recruiter);
+            Major major = db.Majors.Find(id);
+            db.Majors.Remove(major);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -14,7 +14,7 @@ namespace Team14_Final_Project.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class AppUser : IdentityUser
     {
-
+        public virtual Recruiter Recruiters { get; set; }
         public virtual Student Students { get; set; }
 
         //TODO: Put any additional fields that you need for your user here

@@ -14,6 +14,6 @@ namespace Team14_Final_Project.Models
         [Display(Name = "Major Name")]
         public String MajorName { get; set; }
 
-        //public List<Position> PositionList { get; set; }
+        public List<Position> Positions { get; set; }
     }
 }

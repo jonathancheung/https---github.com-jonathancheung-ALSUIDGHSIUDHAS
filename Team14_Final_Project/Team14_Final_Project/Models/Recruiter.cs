@@ -13,7 +13,7 @@ namespace Team14_Final_Project.Models
         public Int32 RecruiterID { get; set; }
 
         //Navigational Property
-        //public virtual List<Company> Company { get; set; }
+        public virtual Company Company { get; set; }
 
     }
 }

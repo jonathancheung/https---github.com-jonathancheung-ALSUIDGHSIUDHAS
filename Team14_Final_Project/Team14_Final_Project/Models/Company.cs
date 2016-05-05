@@ -31,7 +31,7 @@ namespace Team14_Final_Project.Models
 
         [Display(Name = "Industries")]
         public virtual List<Industry> Industries { get; set; }
-
+        public virtual List<Recruiter> Recruiters { get; set; }
 
 
 

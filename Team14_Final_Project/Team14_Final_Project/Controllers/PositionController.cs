@@ -47,12 +47,25 @@ namespace Team14_Final_Project.Controllers
             List<Major> allMajors = query.ToList();
 
             //convert to select list since we only want to allow one committe per event
-            MultiSelectList allMajorsList = new MultiSelectList(allMajors, "MajorID", "MajorName");
+           MultiSelectList allMajorsList = new MultiSelectList(allMajors, "MajorID", "MajorName");
+
+            //create a blank list of integers for the industry IDs
+            List<Int32> SelectedMajors = new List<Int32>();
+
+            var model = new CreatePositionViewModel();
+            var majors = db.Majors.Select(c => new
+            {
+                MajorID = c.MajorID,
+                MajorName = c.MajorName
+
+            }).ToList();
+
+            model.Majors = new MultiSelectList(majors, "MajorID", "MajorName");
 
             //Add the selectList to the ViewBag so the view can use it 
             ViewBag.AllMajors = allMajorsList;
 
-            return View();
+            return View(model);
 
 
         }
@@ -62,34 +75,24 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline")] Position position, int[] allMajors, Int32 MajorID)
+        public ActionResult Create([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline")] Position position, int[] SelectedMajors)
         {
-            ////2. Use integer from the view to find the committee selected by the user
-            //Major SelectedMajor = db.Majors.Find(MajorID);
 
-            ////3. Associate the selected committee with the event
-            //position.ApplicableMajors = SelectedMajor;
 
-            //if (ModelState.IsValid)
-            //{
-            //    db.Positions.Add(position);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            db.Positions.Add(position);
             Position addedPosition = db.Positions.Find(position.PositionID);
             if (ModelState.IsValid)
             {
-              
-                //if (addedPosition.Majors == null)
-                //{
-                //    addedPosition.Majors = new List<Major>();
-                //}
-                //foreach (int id in allIndustries)
-                //{
-                //    Industry ind = db.Industries.Find(id);
-                //    addedCompany.Industries.Add(ind);
-                //}
+                if (position.Majors == null)
+                {
+                    position.Majors = new List<Major>();
+                    foreach (int MajorID in SelectedMajors)
+                    {
+                        Major MajorToAdd = db.Majors.Find(MajorID);
+                        position.Majors.Add(MajorToAdd);
+                    }
+                }
+
+
                 db.Positions.Add(position);
                 db.SaveChanges();
                 return RedirectToAction("Index");

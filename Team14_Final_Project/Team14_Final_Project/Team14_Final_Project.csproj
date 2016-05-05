@@ -170,6 +170,11 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +185,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndustryController.cs" />
+    <Compile Include="Controllers\MajorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
@@ -199,6 +205,22 @@
     <Compile Include="Migrations\201605042131388_Noahsattempt.cs" />
     <Compile Include="Migrations\201605042131388_Noahsattempt.Designer.cs">
       <DependentUpon>201605042131388_Noahsattempt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605042211026_addcreaterecruiter.cs" />
+    <Compile Include="Migrations\201605042211026_addcreaterecruiter.Designer.cs">
+      <DependentUpon>201605042211026_addcreaterecruiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605042216198_CompanyFKRecruiter.cs" />
+    <Compile Include="Migrations\201605042216198_CompanyFKRecruiter.Designer.cs">
+      <DependentUpon>201605042216198_CompanyFKRecruiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605050412520_multiselectlist.cs" />
+    <Compile Include="Migrations\201605050412520_multiselectlist.Designer.cs">
+      <DependentUpon>201605050412520_multiselectlist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605050445432_addposition.cs" />
+    <Compile Include="Migrations\201605050445432_addposition.Designer.cs">
+      <DependentUpon>201605050445432_addposition.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -265,6 +287,11 @@
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Major\Create.cshtml" />
+    <Content Include="Views\Major\Delete.cshtml" />
+    <Content Include="Views\Major\Details.cshtml" />
+    <Content Include="Views\Major\Edit.cshtml" />
+    <Content Include="Views\Major\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -284,6 +311,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605042131388_Noahsattempt.resx">
       <DependentUpon>201605042131388_Noahsattempt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605042211026_addcreaterecruiter.resx">
+      <DependentUpon>201605042211026_addcreaterecruiter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605042216198_CompanyFKRecruiter.resx">
+      <DependentUpon>201605042216198_CompanyFKRecruiter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605050412520_multiselectlist.resx">
+      <DependentUpon>201605050412520_multiselectlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605050445432_addposition.resx">
+      <DependentUpon>201605050445432_addposition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

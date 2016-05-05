@@ -65,6 +65,8 @@ namespace Team14_Final_Project.Controllers
         // GET: /Company/Create
         public ActionResult Create()
         {
+            
+
             //populate list of industries; "Ask" the database for a list of the committees
             var query = from c in db.Industries
                         orderby c.IndustryName
@@ -76,10 +78,23 @@ namespace Team14_Final_Project.Controllers
             //convert to select list since we only want to allow one committe per event
             MultiSelectList allIndustriesList = new MultiSelectList(allIndustries, "IndustryID", "IndustryName");
 
+            //create a blank list of integers for the industry IDs
+            List<Int32> SelectedIndustries = new List<Int32>();
+
+            var model = new CreateCompanyViewModel();
+            var industries = db.Industries.Select(c => new
+            {
+                IndustryID = c.IndustryID,
+                IndustryName = c.IndustryName
+
+            }).ToList();
+
+            model.Industries = new MultiSelectList(industries, "IndustryID", "IndustryName");
+
             //Add the selectList to the ViewBag so the view can use it 
             ViewBag.AllIndustries = allIndustriesList;
 
-            return View();
+            return View(model);
         }
 
         // POST: /Company/Create
@@ -87,35 +102,22 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="CompanyID,CompanyName,CompanyDescription,CompanyEmail")] Company company, int[] allIndustries, Int32 IndustryID)
+        public ActionResult Create([Bind(Include="CompanyID,CompanyName,CompanyDescription,CompanyEmail")] Company company, int[] selectedIndustries)
         {
-            //Industry SelectedIndustry = db.Industries.Find(IndustryID);
 
-            ////3. Associate the selected committee with the event
-            //company.Industries = SelectedIndustry;
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Companies.Add(company);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //return View(company);
             if (ModelState.IsValid)
             {
-                db.Companies.Add(company);
-                Company addedCompany = db.Companies.Find(company.CompanyID);
-
-                if (addedCompany.Industries == null)
+                if (company.Industries == null)
                 {
-                    addedCompany.Industries = new List<Industry>();
+                    company.Industries = new List<Industry>();
+                    foreach (int IndustriesID in selectedIndustries)
+                    {
+                        Industry IndustryToAdd = db.Industries.Find(IndustriesID);
+                        company.Industries.Add(IndustryToAdd);
+                    }
                 }
-                //foreach (int id in allIndustries)
-                //{
-                //    Industry ind = db.Industries.Find(id);
-                //    addedCompany.Industries.Add(ind);
-                //}
+
+
                 db.Companies.Add(company);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -136,7 +138,7 @@ namespace Team14_Final_Project.Controllers
                 return HttpNotFound();
             }
 
-            //Find list of events
+            //find list of industries
             var query3 = from e in db.Industries
                          orderby e.IndustryName
                          select e;
@@ -147,7 +149,7 @@ namespace Team14_Final_Project.Controllers
             //create list of selected events
             List<Int32> SelectedIndustries = new List<Int32>();
 
-            //loop through list of events and add EventID
+            //loop through list of events and add IndustryID
             foreach (Industry e in company.Industries)
             {
                 SelectedIndustries.Add(e.IndustryID);

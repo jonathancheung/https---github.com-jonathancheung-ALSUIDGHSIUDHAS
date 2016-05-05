@@ -40,7 +40,7 @@ namespace Team14_Final_Project.Models
         //public virtual Company CompanyName { get; set; }
         ////public virtual List<Interview> InterviewTimes { get; set; }
         //public virtual List<AppliedStudents> StudentsApplied { get; set; }
-        //public virtual List<Major> Majors { get; set; }
+        public virtual List<Major> Majors { get; set; }
 
 
     }
