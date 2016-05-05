@@ -50,6 +50,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Position.Location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Position.Location)
+                @Html.ValidationMessageFor(model => model.Position.Location)
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-10">
                 @Html.ListBoxFor(model => model.SelectedMajors, Model.Majors, new { @class = "form-control" })
             </div>

@@ -75,11 +75,11 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline")] Position position, int[] SelectedMajors)
+        public ActionResult Create([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,PositionDeadline,Location")] Position position, int[] SelectedMajors)
         {
 
 
-            Position addedPosition = db.Positions.Find(position.PositionID);
+            //Position addedPosition = db.Positions.Find(position.PositionID);
             if (ModelState.IsValid)
             {
                 if (position.Majors == null)
@@ -125,7 +125,7 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline")] Position position)
+        public ActionResult Edit([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline,Location")] Position position)
         {
             if (ModelState.IsValid)
             {
