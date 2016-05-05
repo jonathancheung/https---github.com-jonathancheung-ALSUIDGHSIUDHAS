@@ -38,7 +38,24 @@ namespace Team14_Final_Project.Controllers
         // GET: /Position/Create
         public ActionResult Create()
         {
-            //populate list of committees; "Ask" the database for a list of the committees
+            //COMPANY
+            //populate list of companies
+            var query2 = from c in db.Companies
+                        orderby c.CompanyName
+                        select c;
+
+            //create list and execute query
+            List<Company> allCompanies = query2.ToList();
+
+            //convert to select list since we only want to allow one committe per event
+            SelectList allCompaniesList = new SelectList(allCompanies, "CompanyID", "CompanyName");
+
+            //Add the selectList to the ViewBag so the view can use it 
+            ViewBag.AllCompanies = allCompaniesList;
+
+
+            //MAJORS
+            //populate list of Majors; "Ask" the database for a list of the majors
             var query = from c in db.Majors
                         orderby c.MajorName
                         select c;
@@ -75,13 +92,21 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,PositionDeadline,Location")] Position position, int[] SelectedMajors)
+        public ActionResult Create([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,PositionDeadline,Location,Company,Major")] Position position, int[] SelectedMajors, Int32 CompanyID)
         {
-
-
             //Position addedPosition = db.Positions.Find(position.PositionID);
             if (ModelState.IsValid)
             {
+
+                //COMPANY
+                //Use integer from the view to find the company selected by the user
+                Company SelectedCompany = db.Companies.Find(CompanyID);
+
+                //Associate the selected company with the event
+                position.CompanyName = SelectedCompany;
+
+
+                //MAJOR
                 if (position.Majors == null)
                 {
                     position.Majors = new List<Major>();
@@ -114,6 +139,46 @@ namespace Team14_Final_Project.Controllers
             {
                 return HttpNotFound();
             }
+
+            //COMPANY
+            //populate list of company
+            var query4 = from c in db.Companies
+                        orderby c.CompanyName
+                        select c;
+
+            //create list and execute query
+            List<Company> allCompanies = query4.ToList();
+
+            //convert to select list
+            SelectList list4 = new SelectList(allCompanies, "CompanyID", "CompanyName", position.CompanyName.CompanyID);
+
+            //Add to viewbag
+            ViewBag.AllCompanies = list4;
+
+            //MAJOR
+            //find list of majors
+            var query3 = from e in db.Majors
+                         orderby e.MajorName
+                         select e;
+
+            //convert list and execute query
+            List<Major> allMajors = query3.ToList();
+
+            //create list of selected events
+            List<Int32> SelectedMajors = new List<Int32>();
+
+            //loop through list of events and add MajorID
+            foreach (Major e in position.Majors)
+            {
+                SelectedMajors.Add(e.MajorID);
+            }
+
+            //convert list to multiselect list
+            MultiSelectList allIndustriesList = new MultiSelectList(allMajors, "MajorID", "MajorName", SelectedMajors);
+
+            //Add to viewbag
+            ViewBag.AllIndustries = allIndustriesList;
+
             return View(position);
         }
 
@@ -125,12 +190,49 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline,Location")] Position position)
+        public ActionResult Edit([Bind(Include = "PositionID,PositionTitle,PositionDescription,PositionTypes,ApplicableMajor,PositionDeadline,Location")] Position position, int[] SelectedMajors, Int32 CompanyID)
         {
             if (ModelState.IsValid)
             {
+                //2. Find the associated position
+                Position positionToChange = db.Positions.Find(position.PositionID);
+
+                //change company if necessary
+                if (positionToChange.CompanyName.CompanyID != CompanyID)
+                {
+                    //find company
+                    Company SelectedCompany = db.Companies.Find(CompanyID);
+
+                    //update company
+                    positionToChange.CompanyName = SelectedCompany;
+                }
+
+                //3. Update majors to match the selection from the user
+                //a) Remove any existing majors using clear method
+                positionToChange.Majors.Clear();
+
+                //b) If there's something in the array, loop through it to add each major
+                if (SelectedMajors != null)
+                {
+                    foreach (int majorID in SelectedMajors)
+                    {
+                        Major majorToAdd = db.Majors.Find(majorID);
+                        positionToChange.Majors.Add(majorToAdd);
+                    }
+                }
+
+                //c) Update rest of scalar fields. Event that gets passed over doesn't directly exist in database
+                positionToChange.PositionTitle = position.PositionTitle;
+                positionToChange.PositionDescription = position.PositionDescription;
+                positionToChange.Location = position.Location;
+                positionToChange.PositionTypes = position.PositionTypes;
+                positionToChange.PositionDeadline = position.PositionDeadline;
+
+
+                //d) Update db.Entry code to reflect the event you want to change. Save changes
                 db.Entry(position).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(position);

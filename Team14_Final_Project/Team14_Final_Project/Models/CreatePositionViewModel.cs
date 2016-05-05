@@ -13,7 +13,7 @@ namespace Team14_Final_Project.Models
     public class CreatePositionViewModel
     {
         public virtual Position Position { get; set; }
-
+        public virtual Company Company { get; set; }
         public int[] SelectedMajors { get; set; }
         public MultiSelectList Majors { get; set; }
     }

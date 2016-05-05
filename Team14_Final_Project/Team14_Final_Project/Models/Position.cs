@@ -37,10 +37,10 @@ namespace Team14_Final_Project.Models
         public DateTime PositionDeadline { get; set; }
 
         //Navigation Properties
-        //public virtual Company CompanyName { get; set; }
         ////public virtual List<Interview> InterviewTimes { get; set; }
         //public virtual List<AppliedStudents> StudentsApplied { get; set; }
         public virtual List<Major> Majors { get; set; }
+        public virtual Company CompanyName { get; set; }
 
 
     }

@@ -58,6 +58,13 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">Company</label>
+            <div class="col-md-10">
+                @Html.DropDownList("CompanyID", (SelectList)ViewBag.AllCompanies, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-10">
                 @Html.ListBoxFor(model => model.SelectedMajors, Model.Majors, new { @class = "form-control" })
             </div>

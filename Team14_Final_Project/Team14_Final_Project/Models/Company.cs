@@ -26,8 +26,8 @@ namespace Team14_Final_Project.Models
         public String CompanyEmail { get; set; }
 
         //Navigation properties
-        //[Display(Name = "Positions Available")]
-        //public virtual List<Position> PositionsAvailable { get; set; }
+        [Display(Name = "Positions Available")]
+        public virtual List<Position> PositionsAvailable { get; set; }
 
         [Display(Name = "Industries")]
         public virtual List<Industry> Industries { get; set; }

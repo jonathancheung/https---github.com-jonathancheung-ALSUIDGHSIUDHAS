@@ -30,6 +30,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Location)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName.CompanyName)
+        </th>
         <th></th>
     </tr>
 
@@ -52,6 +55,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName.CompanyName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PositionID }) |

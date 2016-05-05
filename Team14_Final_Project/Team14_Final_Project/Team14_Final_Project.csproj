@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201605050445432_addposition.Designer.cs">
       <DependentUpon>201605050445432_addposition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605050754221_addcompanytoposition.cs" />
+    <Compile Include="Migrations\201605050754221_addcompanytoposition.Designer.cs">
+      <DependentUpon>201605050754221_addcompanytoposition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Company.cs" />
@@ -323,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605050445432_addposition.resx">
       <DependentUpon>201605050445432_addposition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605050754221_addcompanytoposition.resx">
+      <DependentUpon>201605050754221_addcompanytoposition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
