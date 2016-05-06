@@ -13,7 +13,7 @@ namespace Team14_Final_Project.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201605060750029_initial"; }
+            get { return "201605061410402_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -49,11 +49,12 @@ namespace Team14_Final_Project.Models
         public DbSet<Application> Applications { get; set;}
         public DbSet<CSO> CSOes { get; set; }
         public DbSet<Interview> Interviews { get; set; }
-        public DbSet<InterviewRoom> InterviewRooms { get; set; }
-        public DbSet<InterviewTimes> InterviewTimes { get; set; }
+        //public DbSet<InterviewRoom> InterviewRooms { get; set; }
+        //public DbSet<InterviewTimes> InterviewTimes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Student>()
                 .HasRequired(e => e.AppUsers)

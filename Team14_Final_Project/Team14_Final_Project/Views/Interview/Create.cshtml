@@ -1,4 +1,4 @@
-﻿@model Team14_Final_Project.Models.ScheduleInterviewViewModel
+﻿@model Team14_Final_Project.Models.Interview
 @using Team14_Final_Project.Models
 
 
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.InterviewRoom.Rooms, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(m => m.InterviewRoom.Rooms, new { @class = "form-control" })
@@ -37,15 +37,15 @@
                     @Html.EditorFor(model => model.InterviewTime.StartTime)
                     @Html.ValidationMessageFor(model => model.InterviewTime.StartTime)
                 </div>
-            </div>
+            </div>*@
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.InterviewTime.StartTimeHour, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.InterviewTime.StartTimeHour)
                     @Html.ValidationMessageFor(model => model.InterviewTime.StartTimeHour)
                 </div>
-            </div>
+            </div>*@
 
             @*<div class="form-group">
                     @Html.LabelFor(model => model.InterviewID, "InterviewID", new { @class = "control-label col-md-2" })

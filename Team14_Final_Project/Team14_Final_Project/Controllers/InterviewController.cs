@@ -56,35 +56,35 @@ namespace Team14_Final_Project.Controllers
             ViewBag.AllApplications = list4;
 
 
-            //ROOM
-            //populate list of applications
-            var query = from c in db.InterviewRooms
-                        orderby c.Rooms
-                         select c;
+            ////ROOM
+            ////populate list of applications
+            //var query = from c in db.InterviewRooms
+            //            orderby c.Rooms
+            //             select c;
 
-            //create list and execute query
-            List<InterviewRoom> allRooms = query.ToList();
+            ////create list and execute query
+            //List<InterviewRoom> allRooms = query.ToList();
 
-            //convert to select list
-            SelectList list = new SelectList(allRooms, "InterviewRoomID", "Rooms");
+            ////convert to select list
+            //SelectList list = new SelectList(allRooms, "InterviewRoomID", "Rooms");
 
-            //Add to viewbag
-            ViewBag.AllRooms = list;
+            ////Add to viewbag
+            //ViewBag.AllRooms = list;
 
-            //ROOM
-            //populate list of applications
-            var query2 = from c in db.InterviewTimes
-                         orderby c.StartTime
-                        select c;
+            ////ROOM
+            ////populate list of applications
+            //var query2 = from c in db.InterviewTimes
+            //             orderby c.StartTime
+            //            select c;
 
-            //create list and execute query
-            List<InterviewTimes> allTimes = query2.ToList();
+            ////create list and execute query
+            //List<InterviewTimes> allTimes = query2.ToList();
 
-            //convert to select list
-            SelectList list2 = new SelectList(allTimes, "InterviewTimesID", "StartTime");
+            ////convert to select list
+            //SelectList list2 = new SelectList(allTimes, "InterviewTimesID", "StartTime");
 
-            //Add to viewbag
-            ViewBag.AllTimes = list2;
+            ////Add to viewbag
+            //ViewBag.AllTimes = list2;
 
 
             //ViewBag.InterviewID = new SelectList(db.Applications, "ApplicationID", "StudentEID");
@@ -104,13 +104,13 @@ namespace Team14_Final_Project.Controllers
                 //APPLICATION
                 //Use integer from the view to find the application selected by the user
                 Application SelectedApplication = db.Applications.Find(ApplicationID);
-                InterviewRoom SelectedRoom = db.InterviewRooms.Find(InterviewRoomID);
-                InterviewTimes SelectedTime = db.InterviewTimes.Find(InterviewTimeID);
+                //InterviewRoom SelectedRoom = db.InterviewRooms.Find(InterviewRoomID);
+                //InterviewTimes SelectedTime = db.InterviewTimes.Find(InterviewTimeID);
 
                 //Associate the selected company with the event
                 interview.ApplicationAccepted = SelectedApplication;
-                interview.Room = SelectedRoom;
-                interview.Time = SelectedTime;
+                //interview.Room = SelectedRoom;
+                //interview.Time = SelectedTime;
 
                 db.Interviews.Add(interview);
                 db.SaveChanges();
@@ -149,8 +149,8 @@ namespace Team14_Final_Project.Controllers
             if (ModelState.IsValid)
             {
                 interviewToChange.ApplicationAccepted = interview.ApplicationAccepted;
-                interviewToChange.Room = interview.Room;
-                interviewToChange.Time = interview.Time;
+                //interviewToChange.Room = interview.Room;
+                //interviewToChange.Time = interview.Time;
 
 
                 db.Entry(interview).State = EntityState.Modified;
