@@ -16,5 +16,7 @@ namespace Team14_Final_Project.Models
 
         //Navigational Properties
         public virtual Application ApplicationAccepted { get; set; }
+        public virtual InterviewRoom Room { get; set; }
+        public virtual InterviewTimes Time { get; set; }
     }
 }

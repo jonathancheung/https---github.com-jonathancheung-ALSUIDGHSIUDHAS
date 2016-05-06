@@ -27,6 +27,10 @@ namespace Team14_Final_Project.Models
         [DisplayFormat(DataFormatString = "{0:H}", ApplyFormatInEditMode = true)]
         public DateTime StartTimeHour { get; set; }
 
+        //Navigational Property
+        public virtual List<Interview >InterviewTime { get; set; }
+
+
         //DateTime StartTimeHour = default(DateTime).Add(myDateTime.TimeOfDay)
 
 

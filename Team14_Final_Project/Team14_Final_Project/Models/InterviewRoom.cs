@@ -19,6 +19,8 @@ namespace Team14_Final_Project.Models
         public RoomNumber Rooms { get; set; }
 
         //Navigation Property
+        public virtual List<Interview> InterviewRooms { get; set; }
+        
         //public virtual List<InterviewTimeAndRoom> InterviewTimeAndRoom { get; set; }
 
 

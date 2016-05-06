@@ -56,6 +56,37 @@ namespace Team14_Final_Project.Controllers
             ViewBag.AllApplications = list4;
 
 
+            //ROOM
+            //populate list of applications
+            var query = from c in db.InterviewRooms
+                        orderby c.Rooms
+                         select c;
+
+            //create list and execute query
+            List<InterviewRoom> allRooms = query.ToList();
+
+            //convert to select list
+            SelectList list = new SelectList(allRooms, "InterviewRoomID", "Rooms");
+
+            //Add to viewbag
+            ViewBag.AllRooms = list;
+
+            //ROOM
+            //populate list of applications
+            var query2 = from c in db.InterviewTimes
+                         orderby c.StartTime
+                        select c;
+
+            //create list and execute query
+            List<InterviewTimes> allTimes = query2.ToList();
+
+            //convert to select list
+            SelectList list2 = new SelectList(allTimes, "InterviewTimesID", "StartTime");
+
+            //Add to viewbag
+            ViewBag.AllTimes = list2;
+
+
             //ViewBag.InterviewID = new SelectList(db.Applications, "ApplicationID", "StudentEID");
             return View();
         }
@@ -65,7 +96,7 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="InterviewID")] Interview interview, Int32 ApplicationID)
+        public ActionResult Create([Bind(Include="InterviewID")] Interview interview, Int32 ApplicationID, Int32 InterviewRoomID, Int32 InterviewTimeID)
         {
             if (ModelState.IsValid)
             {
@@ -73,9 +104,13 @@ namespace Team14_Final_Project.Controllers
                 //APPLICATION
                 //Use integer from the view to find the application selected by the user
                 Application SelectedApplication = db.Applications.Find(ApplicationID);
+                InterviewRoom SelectedRoom = db.InterviewRooms.Find(InterviewRoomID);
+                InterviewTimes SelectedTime = db.InterviewTimes.Find(InterviewTimeID);
 
                 //Associate the selected company with the event
                 interview.ApplicationAccepted = SelectedApplication;
+                interview.Room = SelectedRoom;
+                interview.Time = SelectedTime;
 
                 db.Interviews.Add(interview);
                 db.SaveChanges();
@@ -109,13 +144,20 @@ namespace Team14_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="InterviewID")] Interview interview)
         {
+            Interview interviewToChange = db.Interviews.Find(interview.InterviewID);
+
             if (ModelState.IsValid)
             {
+                interviewToChange.ApplicationAccepted = interview.ApplicationAccepted;
+                interviewToChange.Room = interview.Room;
+                interviewToChange.Time = interview.Time;
+
+
                 db.Entry(interview).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.InterviewID = new SelectList(db.Applications, "ApplicationID", "StudentEID", interview.InterviewID);
+            //ViewBag.InterviewID = new SelectList(db.Applications, "ApplicationID", "StudentEID", interview.InterviewID);
             return View(interview);
         }
 
