@@ -66,20 +66,6 @@ namespace Team14_Final_Project.Controllers
         // GET: /Student/Create
         public ActionResult Create()
         {
-            //populate list of committees; "Ask" the database for a list of the committees
-            var query = from c in db.Majors
-                        orderby c.MajorName
-                        select c;
-
-            //create list and execute query - Convert query results into a list so we can use it on the view
-            List<Major> allMajors = query.ToList();
-
-            //convert to select list since we only want to allow one committe per event
-            SelectList allMajorsList = new SelectList(allMajors, "MajorID", "MajorName");
-
-            //Add the selectList to the ViewBag so the view can use it 
-            ViewBag.AllMajors = allMajorsList;
-
             return View();
         }
 
@@ -90,6 +76,7 @@ namespace Team14_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,StudentID,GradSemester,GradYear,StudentPosition,GPA")] Student student, Int32 MajorID)
         {
+
             //2. Use integer from the view to find the committee selected by the user
             Major StudentMajor = db.Majors.Find(MajorID);
 
@@ -108,7 +95,7 @@ namespace Team14_Final_Project.Controllers
         }
 
         // GET: /Student/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
@@ -145,20 +132,44 @@ namespace Team14_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,StudentID,GradSemester,GradYear,StudentPosition,GPA")] Student student, Int32 MajorID)
         {
+            //var query = from c in db.Majors
+            //            orderby c.MajorName
+            //            select c;
+
+            //create list and execute query
+            //List<Major> allMajors = query.ToList();
+
+            //convert to select list
+            //SelectList list = new SelectList(allMajors, "MajorID", "MajorName", student.StudentMajor.MajorID);
+
+            //Add to viewbag
+            //ViewBag.AllMajors = list;
             if (ModelState.IsValid)
             {
+                var query = from c in db.Majors
+                            orderby c.MajorName
+                            select c;
+
+                //create list and execute query
+                List<Major> allMajors = query.ToList();
+
                 //2. Find the associated student
                 Student studentToChange = db.Students.Find(student.StudentID);
 
                 //change major if necessary
                 if (studentToChange.StudentMajor.MajorID != MajorID)
                 {
+                    SelectList list = new SelectList(allMajors, "MajorID", "MajorName", student.StudentMajor.MajorID);
+
                     //find major
                     Major SelectedMajor = db.Majors.Find(MajorID);
 
                     //update major
                     studentToChange.StudentMajor = SelectedMajor;
+                    ViewBag.AllMajors = list;
                 }
+
+             
 
                 studentToChange.EID = student.EID;
                 studentToChange.GradSemester = student.GradSemester;

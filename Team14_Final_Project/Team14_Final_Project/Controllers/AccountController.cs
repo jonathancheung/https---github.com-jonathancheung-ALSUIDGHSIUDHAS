@@ -9,12 +9,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Team14_Final_Project.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Team14_Final_Project.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private AppDbContext db = new AppDbContext();
+
         private ApplicationSignInManager _signInManager;
         private AppUserManager _userManager;
 
@@ -101,6 +107,20 @@ namespace Team14_Final_Project.Controllers
         [AllowAnonymous]
         public ActionResult Register(DateTime? LastLoginDate)
         {
+            //populate list of committees; "Ask" the database for a list of the committees
+            var query = from c in db.Majors
+                        orderby c.MajorName
+                        select c;
+
+            //create list and execute query - Convert query results into a list so we can use it on the view
+            List<Major> allMajors = query.ToList();
+
+            //convert to select list since we only want to allow one committe per event
+            SelectList allMajorsList = new SelectList(allMajors, "MajorID", "MajorName");
+
+            //Add the selectList to the ViewBag so the view can use it 
+            ViewBag.AllMajors = allMajorsList;
+
             return View();
         }
 
@@ -114,7 +134,7 @@ namespace Team14_Final_Project.Controllers
             if (ModelState.IsValid)
             {
                 //TODO: Add fields to user here so they will be saved to do the database
-                var user = new AppUser { UserName = model.Email, Email = model.Email, Students = model.student};
+                var user = new AppUser { UserName = model.Email, Email = model.Email, Students = model.student, FirstName = model.FirstName, LastName = model.LastName};
                 user.UserName = model.Email;
                 user.Email = model.Email;
 

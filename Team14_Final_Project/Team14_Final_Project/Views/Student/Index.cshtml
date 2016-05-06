@@ -34,46 +34,49 @@
         </tr>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.AppUsers.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.AppUsers.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmailConfirmed)
+                @Html.DisplayNameFor(model => model.AppUsers.Email)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PasswordHash)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SecurityStamp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LockoutEnabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccessFailedCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
+            @*<th>
+        @Html.DisplayNameFor(model => model.EmailConfirmed)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.PasswordHash)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.SecurityStamp)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.LockoutEnabled)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.AccessFailedCount)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.AppUsers.UserName)
+    </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.StudentID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Major)
+                @Html.DisplayNameFor(model => model.StudentMajor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.GradSemester)
@@ -94,12 +97,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.AppUsers.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.AppUsers.LastName)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.AppUsers.Email)
+                </td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.EmailConfirmed)
                 </td>
                 <td>
@@ -127,13 +133,13 @@
                     @Html.DisplayFor(modelItem => item.AccessFailedCount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
+                    @Html.DisplayFor(modelItem => item.AppUsers.UserName)
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.StudentID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Major)
+                    @Html.DisplayFor(modelItem => item.StudentMajor.MajorName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.GradSemester)
@@ -148,9 +154,9 @@
                     @Html.DisplayFor(modelItem => item.GPA)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StudentID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.StudentID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
                 </td>
             </tr>
         }

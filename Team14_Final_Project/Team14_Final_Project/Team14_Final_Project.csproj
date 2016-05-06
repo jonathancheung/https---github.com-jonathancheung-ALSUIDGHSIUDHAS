@@ -197,61 +197,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605042057033_initial.cs" />
-    <Compile Include="Migrations\201605042057033_initial.Designer.cs">
-      <DependentUpon>201605042057033_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605042113375_fixregister.cs" />
-    <Compile Include="Migrations\201605042113375_fixregister.Designer.cs">
-      <DependentUpon>201605042113375_fixregister.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605042131388_Noahsattempt.cs" />
-    <Compile Include="Migrations\201605042131388_Noahsattempt.Designer.cs">
-      <DependentUpon>201605042131388_Noahsattempt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605042211026_addcreaterecruiter.cs" />
-    <Compile Include="Migrations\201605042211026_addcreaterecruiter.Designer.cs">
-      <DependentUpon>201605042211026_addcreaterecruiter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605042216198_CompanyFKRecruiter.cs" />
-    <Compile Include="Migrations\201605042216198_CompanyFKRecruiter.Designer.cs">
-      <DependentUpon>201605042216198_CompanyFKRecruiter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605050412520_multiselectlist.cs" />
-    <Compile Include="Migrations\201605050412520_multiselectlist.Designer.cs">
-      <DependentUpon>201605050412520_multiselectlist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605050445432_addposition.cs" />
-    <Compile Include="Migrations\201605050445432_addposition.Designer.cs">
-      <DependentUpon>201605050445432_addposition.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605050754221_addcompanytoposition.cs" />
-    <Compile Include="Migrations\201605050754221_addcompanytoposition.Designer.cs">
-      <DependentUpon>201605050754221_addcompanytoposition.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605051710407_addrecruiterfunction.cs" />
-    <Compile Include="Migrations\201605051710407_addrecruiterfunction.Designer.cs">
-      <DependentUpon>201605051710407_addrecruiterfunction.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605060231549_something.cs" />
-    <Compile Include="Migrations\201605060231549_something.Designer.cs">
-      <DependentUpon>201605060231549_something.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605060305396_asiudhasl.cs" />
-    <Compile Include="Migrations\201605060305396_asiudhasl.Designer.cs">
-      <DependentUpon>201605060305396_asiudhasl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605060450481_applioed.cs" />
-    <Compile Include="Migrations\201605060450481_applioed.Designer.cs">
-      <DependentUpon>201605060450481_applioed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605060512503_asildhaslu.cs" />
-    <Compile Include="Migrations\201605060512503_asildhaslu.Designer.cs">
-      <DependentUpon>201605060512503_asildhaslu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605060612491_applied.cs" />
-    <Compile Include="Migrations\201605060612491_applied.Designer.cs">
-      <DependentUpon>201605060612491_applied.cs</DependentUpon>
+    <Compile Include="Migrations\201605060750029_initial.cs" />
+    <Compile Include="Migrations\201605060750029_initial.Designer.cs">
+      <DependentUpon>201605060750029_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -340,47 +288,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605042057033_initial.resx">
-      <DependentUpon>201605042057033_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605042113375_fixregister.resx">
-      <DependentUpon>201605042113375_fixregister.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605042131388_Noahsattempt.resx">
-      <DependentUpon>201605042131388_Noahsattempt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605042211026_addcreaterecruiter.resx">
-      <DependentUpon>201605042211026_addcreaterecruiter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605042216198_CompanyFKRecruiter.resx">
-      <DependentUpon>201605042216198_CompanyFKRecruiter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605050412520_multiselectlist.resx">
-      <DependentUpon>201605050412520_multiselectlist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605050445432_addposition.resx">
-      <DependentUpon>201605050445432_addposition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605050754221_addcompanytoposition.resx">
-      <DependentUpon>201605050754221_addcompanytoposition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605051710407_addrecruiterfunction.resx">
-      <DependentUpon>201605051710407_addrecruiterfunction.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605060231549_something.resx">
-      <DependentUpon>201605060231549_something.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605060305396_asiudhasl.resx">
-      <DependentUpon>201605060305396_asiudhasl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605060450481_applioed.resx">
-      <DependentUpon>201605060450481_applioed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605060512503_asildhaslu.resx">
-      <DependentUpon>201605060512503_asildhaslu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605060612491_applied.resx">
-      <DependentUpon>201605060612491_applied.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605060750029_initial.resx">
+      <DependentUpon>201605060750029_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
