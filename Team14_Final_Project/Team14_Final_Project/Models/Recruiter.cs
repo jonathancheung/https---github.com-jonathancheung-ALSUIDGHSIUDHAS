@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
+
 
 namespace Team14_Final_Project.Models
 {
@@ -15,5 +17,6 @@ namespace Team14_Final_Project.Models
         //Navigational Property
         public virtual Company Company { get; set; }
 
+        public virtual AppUser AppUsers { get; set; } 
     }
 }

@@ -15,5 +15,6 @@ namespace Team14_Final_Project.Models
         public String MajorName { get; set; }
 
         public List<Position> Positions { get; set; }
+        public List<Student> StudentMajorList { get; set; }
     }
 }

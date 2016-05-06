@@ -35,11 +35,6 @@ namespace Team14_Final_Project.Controllers
             return View(student);
         }
 
-        // GET: /Student/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
         //Student Search
         public ViewResult Index(string sortOrder, string searchString)
         {
@@ -61,11 +56,31 @@ namespace Team14_Final_Project.Controllers
                     students = students.OrderBy(s => s.AppUsers.Email);
                     break;
                 case "date_desc":
-                    students = students.OrderByDescending(s => s.Major);
+                    students = students.OrderByDescending(s => s.StudentMajor);
                     break;
 
             }
             return View(students.ToList());
+        }
+
+        // GET: /Student/Create
+        public ActionResult Create()
+        {
+            //populate list of committees; "Ask" the database for a list of the committees
+            var query = from c in db.Majors
+                        orderby c.MajorName
+                        select c;
+
+            //create list and execute query - Convert query results into a list so we can use it on the view
+            List<Major> allMajors = query.ToList();
+
+            //convert to select list since we only want to allow one committe per event
+            SelectList allMajorsList = new SelectList(allMajors, "MajorID", "MajorName");
+
+            //Add the selectList to the ViewBag so the view can use it 
+            ViewBag.AllMajors = allMajorsList;
+
+            return View();
         }
 
         // POST: /Student/Create
@@ -73,8 +88,15 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,StudentID,Major,GradSemester,GradYear,StudentPosition,GPA")] Student student)
+        public ActionResult Create([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,StudentID,GradSemester,GradYear,StudentPosition,GPA")] Student student, Int32 MajorID)
         {
+            //2. Use integer from the view to find the committee selected by the user
+            Major StudentMajor = db.Majors.Find(MajorID);
+
+            //3. Associate the selected committee with the event
+            student.StudentMajor = StudentMajor;
+
+
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);
@@ -97,6 +119,22 @@ namespace Team14_Final_Project.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Major
+            //populate list of majors
+            var query = from c in db.Majors
+                        orderby c.MajorName
+                        select c;
+
+            //create list and execute query
+            List<Major> allMajors = query.ToList();
+
+            //convert to select list
+            SelectList list = new SelectList(allMajors, "MajorID", "MajorName", student.StudentMajor.MajorID);
+
+            //Add to viewbag
+            ViewBag.AllMajors = list;
+
             return View(student);
         }
 
@@ -105,12 +143,32 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,StudentID,Major,GradSemester,GradYear,StudentPosition,GPA")] Student student)
+        public ActionResult Edit([Bind(Include="Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,StudentID,GradSemester,GradYear,StudentPosition,GPA")] Student student, Int32 MajorID)
         {
             if (ModelState.IsValid)
             {
+                //2. Find the associated student
+                Student studentToChange = db.Students.Find(student.StudentID);
+
+                //change major if necessary
+                if (studentToChange.StudentMajor.MajorID != MajorID)
+                {
+                    //find major
+                    Major SelectedMajor = db.Majors.Find(MajorID);
+
+                    //update major
+                    studentToChange.StudentMajor = SelectedMajor;
+                }
+
+                studentToChange.EID = student.EID;
+                studentToChange.GradSemester = student.GradSemester;
+                studentToChange.GradYear = student.GradYear;
+                studentToChange.StudentPosition = student.StudentPosition;
+                studentToChange.GPA = student.GPA;
+
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(student);

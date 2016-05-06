@@ -24,9 +24,9 @@ namespace Team14_Final_Project.Models
         [Display(Name = "EID")]
         public String EID { get; set; }
 
-        [Required(ErrorMessage = "Please select a major.")]
-        [EnumDataType(typeof(StudentMajor))]
-        public StudentMajor Major { get; set; }
+        //[Required(ErrorMessage = "Please select a major.")]
+        //[EnumDataType(typeof(StudentMajor))]
+        //public StudentMajor Major { get; set; }
 
         [Required(ErrorMessage = "Please select a graduating semester.")]
         [Display(Name = "Graduating Semester")]
@@ -39,19 +39,19 @@ namespace Team14_Final_Project.Models
         
 
         [Required(ErrorMessage = "Please select a position type.")]
-        [EnumDataType(typeof(PositionType))]
-        public PositionType StudentPosition {get; set;}
+        [EnumDataType(typeof(PType))]
+        public PType StudentPosition { get; set; }
 
         [Required(ErrorMessage = "Please enter a GPA."),Range(0.00,4.00,ErrorMessage="GPA must be between 0.00 and 4.00")]
         [Display(Name = "GPA")]
         public decimal GPA {get; set;}
 
         //Navigation properties
-        public virtual AppUser AppUsers { get; set; }        
-        
-        //public virtual List<AppliedStudents> StudentsApplied { get; set; }
+        public virtual AppUser AppUsers { get; set; }
 
-            
+        public virtual List<Application> StudentsApplied { get; set; }
+
+        public virtual Major StudentMajor { get; set; }    
             
         }
 

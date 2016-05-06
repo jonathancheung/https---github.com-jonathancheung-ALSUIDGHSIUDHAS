@@ -230,7 +230,7 @@ namespace Team14_Final_Project.Controllers
 
 
                 //d) Update db.Entry code to reflect the event you want to change. Save changes
-                db.Entry(position).State = EntityState.Modified;
+                db.Entry(positionToChange).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

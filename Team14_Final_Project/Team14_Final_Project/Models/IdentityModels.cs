@@ -45,6 +45,7 @@ namespace Team14_Final_Project.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<Recruiter> Recruiters {get; set;}
         public DbSet<Major> Majors { get; set; }
+        public DbSet<Application> Applications { get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,6 +53,12 @@ namespace Team14_Final_Project.Models
             modelBuilder.Entity<Student>()
                 .HasRequired(e => e.AppUsers)
                 .WithOptional(u => u.Students);
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Recruiter>()
+                .HasRequired(e => e.AppUsers)
+                .WithOptional(u => u.Recruiters);
+
         }
 
         //TODO: Make sure that your connection string name is correct here.
@@ -64,6 +71,8 @@ namespace Team14_Final_Project.Models
         {
             return new AppDbContext();
         }
+
+        
 
       
     }

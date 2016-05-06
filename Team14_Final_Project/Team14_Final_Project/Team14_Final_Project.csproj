@@ -175,13 +175,16 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndustryController.cs" />
@@ -226,8 +229,33 @@
     <Compile Include="Migrations\201605050754221_addcompanytoposition.Designer.cs">
       <DependentUpon>201605050754221_addcompanytoposition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605051710407_addrecruiterfunction.cs" />
+    <Compile Include="Migrations\201605051710407_addrecruiterfunction.Designer.cs">
+      <DependentUpon>201605051710407_addrecruiterfunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060231549_something.cs" />
+    <Compile Include="Migrations\201605060231549_something.Designer.cs">
+      <DependentUpon>201605060231549_something.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060305396_asiudhasl.cs" />
+    <Compile Include="Migrations\201605060305396_asiudhasl.Designer.cs">
+      <DependentUpon>201605060305396_asiudhasl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060450481_applioed.cs" />
+    <Compile Include="Migrations\201605060450481_applioed.Designer.cs">
+      <DependentUpon>201605060450481_applioed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060512503_asildhaslu.cs" />
+    <Compile Include="Migrations\201605060512503_asildhaslu.Designer.cs">
+      <DependentUpon>201605060512503_asildhaslu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605060612491_applied.cs" />
+    <Compile Include="Migrations\201605060612491_applied.Designer.cs">
+      <DependentUpon>201605060612491_applied.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\CreateCompanyViewModel.cs" />
     <Compile Include="Models\CreatePositionViewModel.cs" />
@@ -296,6 +324,11 @@
     <Content Include="Views\Major\Details.cshtml" />
     <Content Include="Views\Major\Edit.cshtml" />
     <Content Include="Views\Major\Index.cshtml" />
+    <Content Include="Views\Application\Apply.cshtml" />
+    <Content Include="Views\Application\Delete.cshtml" />
+    <Content Include="Views\Application\Details.cshtml" />
+    <Content Include="Views\Application\Edit.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -330,6 +363,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605050754221_addcompanytoposition.resx">
       <DependentUpon>201605050754221_addcompanytoposition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605051710407_addrecruiterfunction.resx">
+      <DependentUpon>201605051710407_addrecruiterfunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060231549_something.resx">
+      <DependentUpon>201605060231549_something.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060305396_asiudhasl.resx">
+      <DependentUpon>201605060305396_asiudhasl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060450481_applioed.resx">
+      <DependentUpon>201605060450481_applioed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060512503_asildhaslu.resx">
+      <DependentUpon>201605060512503_asildhaslu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605060612491_applied.resx">
+      <DependentUpon>201605060612491_applied.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

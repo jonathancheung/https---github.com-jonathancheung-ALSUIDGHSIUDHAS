@@ -34,10 +34,7 @@ namespace Team14_Final_Project.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-
-
-
-        public virtual AppUser AppUser { get; set; }
         public virtual Recruiter Recruiter { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace Team14_Final_Project.Models
         public virtual List<Major> Majors { get; set; }
         public virtual Company CompanyName { get; set; }
 
+        public virtual List<Application> PositionApplied {get; set;}
 
     }
 }
