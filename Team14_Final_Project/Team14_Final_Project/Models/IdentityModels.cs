@@ -16,6 +16,7 @@ namespace Team14_Final_Project.Models
     {
         public virtual Recruiter Recruiters { get; set; }
         public virtual Student Students { get; set; }
+        public virtual CSO CSOs { get; set; }
 
         //TODO: Put any additional fields that you need for your user here
 
@@ -46,6 +47,10 @@ namespace Team14_Final_Project.Models
         public DbSet<Recruiter> Recruiters {get; set;}
         public DbSet<Major> Majors { get; set; }
         public DbSet<Application> Applications { get; set;}
+        public DbSet<CSO> CSOes { get; set; }
+        public DbSet<Interview> Interviews { get; set; }
+        public DbSet<InterviewRoom> InterviewRooms { get; set; }
+        public DbSet<InterviewTimes> InterviewTimes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -59,6 +64,14 @@ namespace Team14_Final_Project.Models
                 .HasRequired(e => e.AppUsers)
                 .WithOptional(u => u.Recruiters);
 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CSO>()
+                .HasRequired(e => e.AppUsers)
+                .WithOptional(u => u.CSOs);
+
+            modelBuilder.Entity<Application>()
+            .HasOptional(f => f.InterviewSlot)
+            .WithRequired(s => s.ApplicationAccepted);
         }
 
         //TODO: Make sure that your connection string name is correct here.

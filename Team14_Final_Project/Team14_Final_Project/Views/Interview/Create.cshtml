@@ -1,0 +1,68 @@
+﻿@model Team14_Final_Project.Models.ScheduleInterviewViewModel
+@using Team14_Final_Project.Models
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Interview</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Application Name</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ApplicationID", (SelectList)ViewBag.AllApplications, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InterviewRoom.Rooms, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.InterviewRoom.Rooms, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.InterviewRoom.Rooms)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InterviewTime.StartTime, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InterviewTime.StartTime)
+                    @Html.ValidationMessageFor(model => model.InterviewTime.StartTime)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InterviewTime.StartTimeHour, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InterviewTime.StartTimeHour)
+                    @Html.ValidationMessageFor(model => model.InterviewTime.StartTimeHour)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.InterviewID, "InterviewID", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("InterviewID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.InterviewID)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

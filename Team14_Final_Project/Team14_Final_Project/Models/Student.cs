@@ -12,10 +12,13 @@ namespace Team14_Final_Project.Models
     public enum StudentMajor { Accounting, BusinessHonors, Finance, InternationalBusiness, Management, MIS, Marketing, SCM, STM }
     public enum PositionType { Internship, FullTime}
 
+ 
 
     public class Student
     {
         List <int> years = Enumerable.Range(DateTime.Now.Year, 10).ToList();
+
+        //List<int> hourblock = Enumerable.Range(9,17).ToList();
 
         [Key]
         public Int32 StudentID { get; set; }

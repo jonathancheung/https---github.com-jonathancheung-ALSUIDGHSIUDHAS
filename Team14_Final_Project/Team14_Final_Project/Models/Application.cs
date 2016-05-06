@@ -39,8 +39,12 @@ namespace Team14_Final_Project.Models
         public DateTime PositionDeadline { get; set; }
         public DateTime Today = DateTime.Today;
 
+        //Title
+        public String ApplicationTitle { get; set; }
+
         public virtual Student StudentApplied { get; set; }
         public virtual Position Positionspplied { get; set; }
+        public virtual Interview InterviewSlot { get; set; }
 
     }
 

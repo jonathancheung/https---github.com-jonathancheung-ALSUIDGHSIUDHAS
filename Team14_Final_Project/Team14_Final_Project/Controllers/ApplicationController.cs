@@ -148,6 +148,12 @@ namespace Team14_Final_Project.Controllers
 
                 //}
 
+                //set application title 
+
+
+
+                application.ApplicationTitle = application.StudentEID + " - " + application.Positionspplied.PositionTitle;
+
 
                 db.Applications.Add(application);
                 db.SaveChanges();
@@ -187,9 +193,8 @@ namespace Team14_Final_Project.Controllers
             if (ModelState.IsValid)
             {
 
-
+                //application.ApplicationTitle = application.StudentEID + " - " + application.Positionspplied.PositionTitle;
                 applicationToChange.ApplicationStatus = application.ApplicationStatus;
-
 
                 //db.Entry(application).State = EntityState.Modified;
 

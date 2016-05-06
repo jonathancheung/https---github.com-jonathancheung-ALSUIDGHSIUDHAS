@@ -186,8 +186,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CSOController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndustryController.cs" />
+    <Compile Include="Controllers\InterviewController.cs" />
+    <Compile Include="Controllers\InterviewRoomController.cs" />
+    <Compile Include="Controllers\InterviewTimesController.cs" />
     <Compile Include="Controllers\MajorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
@@ -201,6 +205,22 @@
     <Compile Include="Migrations\201605060750029_initial.Designer.cs">
       <DependentUpon>201605060750029_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605061152479_CSO.cs" />
+    <Compile Include="Migrations\201605061152479_CSO.Designer.cs">
+      <DependentUpon>201605061152479_CSO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605061229163_interview.cs" />
+    <Compile Include="Migrations\201605061229163_interview.Designer.cs">
+      <DependentUpon>201605061229163_interview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605061249074_updateinterview.cs" />
+    <Compile Include="Migrations\201605061249074_updateinterview.Designer.cs">
+      <DependentUpon>201605061249074_updateinterview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605061307419_InterviewTimeandRoom.cs" />
+    <Compile Include="Migrations\201605061307419_InterviewTimeandRoom.Designer.cs">
+      <DependentUpon>201605061307419_InterviewTimeandRoom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Application.cs" />
@@ -208,14 +228,19 @@
     <Compile Include="Models\CreateCompanyViewModel.cs" />
     <Compile Include="Models\CreatePositionViewModel.cs" />
     <Compile Include="Models\CreateRecruiterViewModel.cs" />
+    <Compile Include="Models\CSO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityRoles.cs" />
     <Compile Include="Models\Industry.cs" />
+    <Compile Include="Models\Interview.cs" />
+    <Compile Include="Models\InterviewRoom.cs" />
+    <Compile Include="Models\InterviewTimes.cs" />
     <Compile Include="Models\Major.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Recruiter.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
+    <Compile Include="Models\ScheduleInterviewViewModel.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -278,6 +303,27 @@
     <Content Include="Views\Application\Edit.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Application\Error.cshtml" />
+    <Content Include="Views\CSO\Create.cshtml" />
+    <Content Include="Views\CSO\Delete.cshtml" />
+    <Content Include="Views\CSO\Details.cshtml" />
+    <Content Include="Views\CSO\Edit.cshtml" />
+    <Content Include="Views\CSO\Index.cshtml" />
+    <Content Include="Views\CSO\Register.cshtml" />
+    <Content Include="Views\Interview\Create.cshtml" />
+    <Content Include="Views\Interview\Delete.cshtml" />
+    <Content Include="Views\Interview\Details.cshtml" />
+    <Content Include="Views\Interview\Edit.cshtml" />
+    <Content Include="Views\Interview\Index.cshtml" />
+    <Content Include="Views\InterviewRoom\Create.cshtml" />
+    <Content Include="Views\InterviewRoom\Delete.cshtml" />
+    <Content Include="Views\InterviewRoom\Details.cshtml" />
+    <Content Include="Views\InterviewRoom\Edit.cshtml" />
+    <Content Include="Views\InterviewRoom\Index.cshtml" />
+    <Content Include="Views\InterviewTimes\Create.cshtml" />
+    <Content Include="Views\InterviewTimes\Delete.cshtml" />
+    <Content Include="Views\InterviewTimes\Details.cshtml" />
+    <Content Include="Views\InterviewTimes\Edit.cshtml" />
+    <Content Include="Views\InterviewTimes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -291,6 +337,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605060750029_initial.resx">
       <DependentUpon>201605060750029_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061152479_CSO.resx">
+      <DependentUpon>201605061152479_CSO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061229163_interview.resx">
+      <DependentUpon>201605061229163_interview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061249074_updateinterview.resx">
+      <DependentUpon>201605061249074_updateinterview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061307419_InterviewTimeandRoom.resx">
+      <DependentUpon>201605061307419_InterviewTimeandRoom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

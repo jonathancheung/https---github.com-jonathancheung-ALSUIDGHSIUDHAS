@@ -9,20 +9,24 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Team14_Final_Project.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 using System.Net;
 using System.Data.Entity;
-using System.Collections.Generic;
+
 namespace Team14_Final_Project.Controllers
 {
-    public class RecruiterController : Controller
+    public class CSOController : Controller
     {
         private AppDbContext db = new AppDbContext();
         private ApplicationSignInManager _signInManager;
         private AppUserManager _userManager;
-        public RecruiterController()
+        public CSOController()
         {
         }
-        public RecruiterController(AppUserManager userManager, ApplicationSignInManager signInManager)
+        public CSOController(AppUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -49,71 +53,44 @@ namespace Team14_Final_Project.Controllers
                 _userManager = value;
             }
         }
-        // GET: /Recruiter/
+        // GET: /CSO/
         public ActionResult Index()
         {
-            return View(db.Recruiters.ToList());
+            return View(db.CSOes.ToList());
         }
-        // GET: /Recruiter/Details/5
-        public ActionResult Details(string id)
+        // GET: /CSO/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recruiter recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
+            CSO cso = db.CSOes.Find(id);
+            if (cso == null)
             {
                 return HttpNotFound();
             }
-            return View(recruiter);
+            return View(cso);
         }
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Create(DateTime? LastLoginDate)
+        // GET: /CSO/Create
+        public ActionResult Register(DateTime? LastLoginDate)
         {
-            var query = from c in db.Companies
-                        orderby c.CompanyName
-                        select c;
-            //create list and execute query - Convert query results into a list so we can use it on the view
-            List<Company> allCompanies = query.ToList();
-            //convert to select list since we only want to allow one committe per event
-            SelectList allCompaniesList = new SelectList(allCompanies, "CompanyID", "CompanyName");
-            //Add the selectList to the ViewBag so the view can use it 
-            ViewBag.AllCompanies = allCompaniesList;
             return View();
         }
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Company")] CreateRecruiterViewModel model, Recruiter recruiter, Int32 CompanyID)
-        public async Task<ActionResult> Create(CreateRecruiterViewModel model, Int32 CompanyID, Recruiter recruiter)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var query = from c in db.Companies
-                            orderby c.CompanyName
-                            select c;
-                //create list and execute query - Convert query results into a list so we can use it on the view
-                List<Company> allCompanies = query.ToList();
-                //convert to select list since we only want to allow one committe per event
-                SelectList allCompaniesList = new SelectList(allCompanies, "CompanyID", "CompanyName");
-                //Add the selectList to the ViewBag so the view can use it 
-                ViewBag.AllCompanies = allCompaniesList;
-                Company SelectedCompany = db.Companies.Find(CompanyID);
-                recruiter.Company = SelectedCompany;
                 //TODO: Add fields to user here so they will be saved to do the database
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Recruiters = model.Recruiter };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 user.UserName = model.Email;
                 user.Email = model.Email;
                 var result = await UserManager.CreateAsync(user, model.Password);
-                //db.Recruiters.Add(recruiter);
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
                 //TODO:  Once you get roles working, you may want to add users to roles upon creation
-                await UserManager.AddToRoleAsync(user.Id, "Recruiter");
+                await UserManager.AddToRoleAsync(user.Id, "CSO");
                 // --OR--
                 // await UserManager.AddToRoleAsync(user.Id, "Employee");
                 if (result.Succeeded)
@@ -131,56 +108,56 @@ namespace Team14_Final_Project.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        // GET: /Recruiter/Edit/5
-        public ActionResult Edit(string id)
+        // GET: /CSO/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recruiter recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
+            CSO cso = db.CSOes.Find(id);
+            if (cso == null)
             {
                 return HttpNotFound();
             }
-            return View(recruiter);
+            return View(cso);
         }
-        // POST: /Recruiter/Edit/5
+        // POST: /CSO/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,RecruiterID")] Recruiter recruiter)
+        public ActionResult Edit([Bind(Include = "CSOID")] CSO cso)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recruiter).State = EntityState.Modified;
+                db.Entry(cso).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(recruiter);
+            return View(cso);
         }
-        //GET: /Recruiter/Delete/5
-        public ActionResult Delete(string id)
+        // GET: /CSO/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recruiter recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
+            CSO cso = db.CSOes.Find(id);
+            if (cso == null)
             {
                 return HttpNotFound();
             }
-            return View(recruiter);
+            return View(cso);
         }
-        // POST: /Recruiter/Delete/5
+        // POST: /CSO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Recruiter recruiter = db.Recruiters.Find(id);
-            db.Recruiters.Remove(recruiter);
+            CSO cso = db.CSOes.Find(id);
+            db.CSOes.Remove(cso);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
