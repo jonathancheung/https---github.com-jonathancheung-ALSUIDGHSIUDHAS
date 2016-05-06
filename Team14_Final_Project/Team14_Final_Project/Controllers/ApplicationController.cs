@@ -8,11 +8,19 @@ using System.Web;
 using System.Web.Mvc;
 using Team14_Final_Project.Models;
 
+
 namespace Team14_Final_Project.Controllers
 {
     public class ApplicationController : Controller
     {
         private AppDbContext db = new AppDbContext();
+
+        // GET: /Error/
+        public ActionResult Error()
+        {
+            return View();
+        }
+
 
         // GET: /Application/
         public ActionResult Index()
@@ -38,6 +46,36 @@ namespace Team14_Final_Project.Controllers
         // GET: /Application/Apply
         public ActionResult Apply()
         {
+            //POSITION
+            //populate list of position
+            var query = from c in db.Positions
+                         orderby c.PositionTitle
+                         select c;
+
+            //create list and execute query
+            List<Position> allPositions = query.ToList();
+
+            //convert to select list since we only want to allow one position application
+            SelectList allPositionsList = new SelectList(allPositions, "PositionID", "PositionTitle");
+
+            //Add the selectList to the ViewBag so the view can use it 
+            ViewBag.AllPositions = allPositionsList;
+
+            //STUDENT
+            //populate list of position
+            var query2 = from c in db.Students
+                        orderby c.EID
+                        select c;
+
+            //create list and execute query
+            List<Student> allStudents = query2.ToList();
+
+            //convert to select list since we only want to allow one position application
+            SelectList allStudentsList = new SelectList(allStudents, "StudentID", "EID");
+
+            //Add the selectList to the ViewBag so the view can use it 
+            ViewBag.AllStudents = allStudentsList;
+
             return View();
         }
 
@@ -46,10 +84,26 @@ namespace Team14_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Apply([Bind(Include = "ApplicationID,ApplicationStatus")] Application application)
+        public ActionResult Apply([Bind(Include = "ApplicationID,ApplicationStatus")] Application application, Int32 PositionID, Int32 StudentID)
         {
+            //POSITION
+            //Use integer from the view to find the company selected by the user
+            Position SelectedPosition = db.Positions.Find(PositionID);
+
+            //Associate the selected company with the event
+            application.Positionspplied = SelectedPosition;
+
+            //STUDENT
+            //Use integer from the view to find the company selected by the user
+            Student SelectedStudent = db.Students.Find(StudentID);
+
+            //Associate the selected company with the event
+            application.StudentApplied = SelectedStudent;
+
+
             if (ModelState.IsValid)
             {
+
                 //set studentID
                 application.StudentEID = application.StudentApplied.EID;
 
@@ -61,7 +115,7 @@ namespace Team14_Final_Project.Controllers
 
                 if(Type == true)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Error");
                 }
 
                 //check deadline
@@ -70,7 +124,7 @@ namespace Team14_Final_Project.Controllers
 
                 if(Date == false)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Error");
                 }
 
                 //check major
@@ -82,7 +136,7 @@ namespace Team14_Final_Project.Controllers
                     bool CheckMajor = application.StudentMajor != major;
                     if(CheckMajor == true)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Error");
                     }
 
                 }
@@ -115,6 +169,8 @@ namespace Team14_Final_Project.Controllers
             {
                 return HttpNotFound();
             }
+
+
             return View(application);
         }
 
@@ -125,10 +181,20 @@ namespace Team14_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="ApplicationID,ApplicationStatus")] Application application)
         {
+            
+            Application applicationToChange = db.Applications.Find(application.ApplicationID);
+            
             if (ModelState.IsValid)
             {
-                db.Entry(application).State = EntityState.Modified;
+
+
+                applicationToChange.ApplicationStatus = application.ApplicationStatus;
+
+
+                //db.Entry(application).State = EntityState.Modified;
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(application);

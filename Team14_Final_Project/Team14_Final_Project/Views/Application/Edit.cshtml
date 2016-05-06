@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ApplicationStatus, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ApplicationStatus)
+                @Html.EnumDropDownListFor(model => model.ApplicationStatus)
                 @Html.ValidationMessageFor(model => model.ApplicationStatus)
             </div>
         </div>

@@ -15,6 +15,8 @@ namespace Team14_Final_Project.Models
         [Key]
         public Int32 ApplicationID { get; set; }
 
+
+
         [Display(Name = "Application Status")]
         [EnumDataType(typeof(ApplicationStatus))]
         public ApplicationStatus ApplicationStatus { get; set; }
@@ -39,5 +41,7 @@ namespace Team14_Final_Project.Models
 
         public virtual Student StudentApplied { get; set; }
         public virtual Position Positionspplied { get; set; }
+
     }
+
 }

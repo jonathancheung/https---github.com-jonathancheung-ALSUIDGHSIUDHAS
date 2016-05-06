@@ -16,7 +16,19 @@
         <hr />
         @Html.ValidationSummary(true)
 
+        <div class="form-group">
+            <label class="control-label col-md-2">StudentID</label>
+            <div class="col-md-10">
+                @Html.DropDownList("StudentID", (SelectList)ViewBag.AllStudents, new { @class = "form-control" })
+            </div>
+        </div>
 
+        <div class="form-group">
+            <label class="control-label col-md-2">Position</label>
+            <div class="col-md-10">
+                @Html.DropDownList("PositionID", (SelectList)ViewBag.AllPositions, new { @class = "form-control" })
+            </div>
+        </div>
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.ApplicationStatus, new { @class = "control-label col-md-2" })
